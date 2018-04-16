@@ -20,6 +20,7 @@ public class FenetrePrincipale extends JFrame {
         setExtendedState(MAXIMIZED_BOTH);
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
+        frameContainer.setLayout(new BorderLayout());
         acceuil = new MessageAcceuil();
         frameContainer.add(acceuil, BorderLayout.CENTER);
 
