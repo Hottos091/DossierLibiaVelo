@@ -10,7 +10,7 @@ public class FenetrePrincipale extends JFrame {
     private JMenuBar menuBar;
     private JMenu nouvelleInscription, gestionMembreFamille, locationVelo, recherches;
     private JMenuItem nouveauClient, nouveauMembreFamille, modifierInformationMembreFamille, supprimerMembreFamille, afficherMembreFamille, louerVelo, rechercheVeloLouer, historiqueAncienneInscription, informationMembreFamille;
-    private MessageAcceuil acceuil;
+    private MessageAccueil acceuil;
 
     public FenetrePrincipale(){
         super("LibiaVelo");
@@ -21,7 +21,7 @@ public class FenetrePrincipale extends JFrame {
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
         frameContainer.setLayout(new BorderLayout());
-        acceuil = new MessageAcceuil();
+        acceuil = new MessageAccueil();
         frameContainer.add(acceuil, BorderLayout.CENTER);
 
         menuBar = new JMenuBar();
