@@ -1,4 +1,4 @@
-/*package view;
+package view;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,11 +16,14 @@ public class FenetrePrincipale2 extends JFrame implements ActionListener {
 
     private Container frameContainer;
     private JMenuBar menuBar;
-    private JMenu nouvelleInscription, gestionMembreFamille, locationVelo, recherches;
-    private JMenuItem nouveauClient, nouveauMembreFamille, modifierInformationMembreFamille, supprimerMembreFamille, afficherMembreFamille, louerVelo, rechercheVeloLoue, historiqueAncienneInscription, informationMembreFamille;
+    JMenu [] menus = new JMenu [NB_MENUS];
+    JMenuItem [] itemsJMenu = new JMenuItem[NB_J_MENU_ITEM];
+    String [] labels = {"Ajouter un nouveau client", "Modifier les informations d'un membre", "Supprimer un membre de la famille", "Afficher tous les membres d'une famille",
+            "Louer un vélo", "Rechercher les informations d'un vélo loué", "Afficher l'historique des anciennes inscriptions" ,"Afficher les informations d'un membre de la famille"};
     private MessageAccueil accueil;
 
     public FenetrePrincipale2(){
+        //Définition dimensions fenêtre + activation fenêtre
         super("LibiaVelo");
         setVisible(true);
         setBounds(100,100,1100,600);
@@ -31,25 +34,36 @@ public class FenetrePrincipale2 extends JFrame implements ActionListener {
         frameContainer.setLayout(new BorderLayout());
         accueil = new MessageAccueil();
         frameContainer.add(accueil, BorderLayout.CENTER);
-//TODO : METTRE LES MENUS EN TABLEAU
+
+        //insertion des JMenu dans tableau de menus
         menuBar = new JMenuBar();
-        JMenu [] menus = new JMenu [NB_MENUS];
         setJMenuBar(menuBar);
-        nouvelleInscription = new JMenu("Nouvelle inscription");
-        gestionMembreFamille = new JMenu("Gestion des membres de la famille");
-        locationVelo = new JMenu("Louer un vélo");
-        recherches = new JMenu("Recherches");
 
-        menuBar.add(nouvelleInscription);
-        menuBar.add(gestionMembreFamille);
-        menuBar.add(locationVelo);
-        menuBar.add(recherches);
+        menus[0] = new JMenu("Nouvelle inscription");
+
+        menus[1] = new JMenu("Gestion des membres de la famille");
+        menus[2] = new JMenu("Louer un vélo");
+        menus[3] = new JMenu("Recherches");
 
 
-        //Création tableau JMenuItem avec Mnemonic pour identification du menu plus simple.
-        JMenuItem [] itemsJMenu = new JMenuItem[NB_J_MENU_ITEM];
+        int cptSauve = 0;
+        for(int cptMenu = 0;cptMenu < menus.length;cptMenu++){
+            menuBar.add(menus[cptMenu]);
+            menus[cptMenu].setMnemonic(cptMenu);
+            System.out.println("Coucou");
+            for(int cptItemsMenu = cptSauve;cptItemsMenu < menus[cptMenu].getItemCount();cptItemsMenu++){
+                itemsJMenu[cptItemsMenu] = new JMenuItem(labels[cptItemsMenu]);
+                itemsJMenu[cptItemsMenu].addActionListener(this);
+                itemsJMenu[cptItemsMenu].setMnemonic(cptItemsMenu);
+                System.out.println("Bruh");
 
-        itemsJMenu[0] = new JMenuItem("Ajouter un nouveau client");
+                menus[cptItemsMenu].add(itemsJMenu[cptItemsMenu]);
+                cptSauve++;
+            }
+        }
+        //Remplissage du tableau itemsJMenu (contient les JMenuItem). Usage de Mnemonic pour identification du menu plus simple.
+        /*
+        itemsJMenu[0] = new JMenuItem();
         itemsJMenu[0].addActionListener(this);
         itemsJMenu[0].setMnemonic(0);
 
@@ -84,17 +98,26 @@ public class FenetrePrincipale2 extends JFrame implements ActionListener {
         itemsJMenu[8] = new JMenuItem("Afficher les informations d'un membre de la famille");
         itemsJMenu[8].addActionListener(this);
         itemsJMenu[8].setMnemonic(8);
+        */
 
-        nouvelleInscription.add(itemsJMenu[0]);
-        gestionMembreFamille.add(itemsJMenu[1]);
-        gestionMembreFamille.add(itemsJMenu[2]);
-        gestionMembreFamille.add(itemsJMenu[3]);
-        gestionMembreFamille.add(itemsJMenu[4]);
-        locationVelo.add(itemsJMenu[5]);
-        recherches.add(itemsJMenu[6]);
-        recherches.add(itemsJMenu[7]);
-        recherches.add(itemsJMenu[8]);
 
+
+        /*
+        menus[0].add(itemsJMenu[0]);
+        menus[1].add(itemsJMenu[1]);
+        menus[1].add(itemsJMenu[2]);
+        menus[1].add(itemsJMenu[3]);
+        menus[1].add(itemsJMenu[4]);
+        menus[2].add(itemsJMenu[5]);
+        menus[3].add(itemsJMenu[6]);
+        menus[3].add(itemsJMenu[7]);
+        menus[3].add(itemsJMenu[8]);
+        */
+        //Ajout des menus dans la menuBar
+        for(int i = 0;i < menus.length;i++){
+            System.out.println("Taille menu " + (i) + " : " + menus[i].getItemCount() );
+
+        }
         //Fermeture de la fenêtre
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -115,4 +138,4 @@ public class FenetrePrincipale2 extends JFrame implements ActionListener {
         frameContainer.revalidate();
         frameContainer.repaint();
     }
-}*/
+}
